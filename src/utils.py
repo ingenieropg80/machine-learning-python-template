@@ -183,3 +183,29 @@ def plot_parallel_coordinates(data, target_col, colors=("#E58139", "#39E581","#E
     pd.plotting.parallel_coordinates(df_plot, target_col, color=colors)
     plt.xticks(rotation=45)
     plt.show()
+
+#-------------------------------------------------------------------
+def analizar(df):
+    # Variables numéricas
+    numericas = df.select_dtypes(include=['number']).columns.tolist()
+    print("Variables numéricas:", numericas)
+
+    # Variables no numéricas
+    no_numericas = df.select_dtypes(exclude=['number']).columns.tolist()
+    print("Variables no numéricas:", no_numericas)
+
+    # Forma del dataset
+    print("\nShape del dataset:", df.shape)
+
+    # Información general
+    print("\nInformación del dataset:")
+    print(df.info())
+
+    # Valores nulos por columna
+    print("\nValores nulos por columna:")
+    print(df.isnull().sum().sort_values(ascending=False))
+
+    # Filas duplicadas
+    duplicados = df[df.duplicated(keep=False)]
+    print("\nFilas duplicadas:")
+    print(duplicados)
